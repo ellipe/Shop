@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './views/product_overview.dart';
 
+import './views/product_detail.dart';
+
 void main() {
   runApp(ShopApp());
 }
@@ -17,6 +19,9 @@ class ShopApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: ProductOverview(),
+      routes: {
+        ProductDetail.routeName: (ctx) => ProductDetail(),
+      },
     );
   }
 }
