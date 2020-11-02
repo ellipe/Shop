@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 // providers
 import '../providers/cart.dart' show Cart;
+import '../providers/orders.dart';
 
 // widgets
 import '../widgets/cart_item.dart';
@@ -44,10 +45,22 @@ class ShoppingCart extends StatelessWidget {
                   backgroundColor: Theme.of(context).primaryColor,
                 ),
                 FlatButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    if (cart.items.values.length > 0) {
+                      Provider.of<Orders>(context, listen: false).addOrder(
+                        cart.items.values.toList(),
+                        cart.totalAmount,
+                      );
+                      cart.clearCart();
+                      Navigator.of(context).pushReplacementNamed('/');
+                    }
+                  },
                   child: Text(
                     'ORDER NOW',
-                    style: TextStyle(color: Theme.of(context).primaryColor),
+                    style: TextStyle(
+                        color: Theme.of(
+                      context,
+                    ).primaryColor),
                   ),
                 ),
               ],
