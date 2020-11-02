@@ -3,6 +3,7 @@ import './product.dart';
 
 // this is central store allowing set reducers to the state.
 class Products with ChangeNotifier {
+
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -40,6 +41,10 @@ class Products with ChangeNotifier {
 
   List<Product> get items {
     return [..._items];
+  }
+
+  List<Product> get favoriteItems {
+    return _items.where((item) => item.isFavorite).toList();
   }
 
   void addProduct(){
