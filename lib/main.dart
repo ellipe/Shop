@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 // views
 import './views/product_overview.dart';
 import './views/product_detail.dart';
+import './views/shopping_cart.dart';
 
 // providers
 import 'providers/products.dart';
@@ -33,6 +34,7 @@ class ShopApp extends StatelessWidget {
           home: ProductOverview(),
           routes: {
             ProductDetail.routeName: (ctx) => ProductDetail(),
+            ShoppingCart.routeName: (ctx) => ShoppingCart(),
           },
         ),
     );

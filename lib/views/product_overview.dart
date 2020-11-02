@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// routes
+import './shopping_cart.dart';
+
 // providers
 import '../providers/cart.dart';
 
@@ -32,7 +35,9 @@ class _ProductOverviewState extends State<ProductOverview> {
               value: cart.itemCount.toString(),
             ),
             child: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pushNamed(ShoppingCart.routeName);
+              },
               icon: Icon(Icons.shopping_cart),
             ),
           ),
