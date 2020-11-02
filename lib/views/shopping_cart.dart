@@ -57,11 +57,12 @@ class ShoppingCart extends StatelessWidget {
         SizedBox(height: 10),
         Expanded(
           child: ListView.builder(
-            itemBuilder: (ctx, idx) => CartItem(
-                id: cart.items.values.toList()[idx].id,
-                title: cart.items.values.toList()[idx].title,
-                quantity: cart.items.values.toList()[idx].quantity,
-                price: cart.items.values.toList()[idx].price),
+            itemBuilder: (ctx, i) => CartItem(
+                productId: cart.items.keys.toList()[i],
+                id: cart.items.values.toList()[i].id,
+                title: cart.items.values.toList()[i].title,
+                quantity: cart.items.values.toList()[i].quantity,
+                price: cart.items.values.toList()[i].price),
             itemCount: cart.itemCount,
           ),
         ),
