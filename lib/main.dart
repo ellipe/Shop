@@ -5,10 +5,12 @@ import 'package:provider/provider.dart';
 import './views/product_overview.dart';
 import './views/product_detail.dart';
 import './views/shopping_cart.dart';
+import './views/orders_list.dart';
 
 // providers
-import 'providers/products.dart';
-import 'providers/cart.dart';
+import './providers/products.dart';
+import './providers/cart.dart';
+import './providers/orders.dart';
 
 
 void main() {
@@ -23,6 +25,7 @@ class ShopApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider(create: (_) => Products(),),
           ChangeNotifierProvider(create: (_) => Cart(),),
+          ChangeNotifierProvider(create: (_) => Orders(),),
         ],
         child: MaterialApp(
           theme: ThemeData(
@@ -35,6 +38,7 @@ class ShopApp extends StatelessWidget {
           routes: {
             ProductDetail.routeName: (ctx) => ProductDetail(),
             ShoppingCart.routeName: (ctx) => ShoppingCart(),
+            OrdersList.routeName: (ctx) => OrdersList(),
           },
         ),
     );
