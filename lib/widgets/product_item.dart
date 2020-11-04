@@ -17,9 +17,9 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         child: GestureDetector(
           onTap: () {
-            Scaffold.of(context).hideCurrentSnackBar(); // @TODO look for best practices.
             Navigator.of(context)
-                .pushNamed(ProductDetail.routeName, arguments: product.id);
+                .pushNamed(ProductDetail.routeName, arguments: product.id)
+                .then((_) => Scaffold.of(context).hideCurrentSnackBar());
           },
           child: Image.network(
             product.imageUrl,

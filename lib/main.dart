@@ -6,6 +6,7 @@ import './views/product_overview.dart';
 import './views/product_detail.dart';
 import './views/shopping_cart.dart';
 import './views/orders_list.dart';
+import './views/user_products.dart';
 
 // providers
 import './providers/products.dart';
@@ -39,6 +40,7 @@ class ShopApp extends StatelessWidget {
             ProductDetail.routeName: (ctx) => ProductDetail(),
             ShoppingCart.routeName: (ctx) => ShoppingCart(),
             OrdersList.routeName: (ctx) => OrdersList(),
+            UserProducts.routeName: (ctx) => UserProducts(),
           },
         ),
     );

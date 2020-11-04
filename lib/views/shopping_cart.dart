@@ -9,7 +9,7 @@ import '../providers/orders.dart';
 import '../widgets/cart_item.dart';
 
 class ShoppingCart extends StatelessWidget {
-  static const routeName = '/shopping_cart';
+  static const routeName = '/shopping-cart';
 
   @override
   Widget build(BuildContext context) {
