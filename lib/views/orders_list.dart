@@ -19,9 +19,14 @@ class OrdersList extends StatelessWidget {
         ),
       ),
       drawer: AppDrawer(),
-      body: ListView.builder(
-          itemBuilder: (ctx, idx) => OrderItem(ordersData.orders[idx]),
-          itemCount: ordersData.orders.length),
+      body: ordersData.orders.length != 0
+          ? ListView.builder(
+              itemBuilder: (ctx, idx) => OrderItem(ordersData.orders[idx]),
+              itemCount: ordersData.orders.length,
+            )
+          : Center(
+              child: Text('No orders placed yet!'),
+            ),
     );
   }
 }

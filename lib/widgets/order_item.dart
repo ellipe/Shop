@@ -34,6 +34,7 @@ class _OrderItemState extends State<OrderItem> {
                 });
               }),
         ),
+        if (_expanded) Divider(),
         if (_expanded)
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
