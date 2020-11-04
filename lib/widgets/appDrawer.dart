@@ -8,12 +8,11 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final currentRoute = ModalRoute.of(context).settings.name;
-    print(currentRoute);
     return Drawer(
       child: Column(
         children: [
           AppBar(
-            title: Text('Hello Friend'),
+            title: Text('Menu'),
             automaticallyImplyLeading: false,
           ),
           ListTile(
@@ -44,7 +43,7 @@ class AppDrawer extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.edit),
-            title: Text('Products',
+            title: Text('Manage Products',
                 style: TextStyle(
                     fontWeight: currentRoute == UserProducts.routeName
                         ? FontWeight.w900

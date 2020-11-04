@@ -27,7 +27,7 @@ class _ProductOverviewState extends State<ProductOverview> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'My Shop',
+          'Shop',
         ),
         actions: [
           Consumer<Cart>(

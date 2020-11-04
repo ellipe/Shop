@@ -20,7 +20,7 @@ class UserProducts extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Your Products'),
+        title: const Text('Manage Products'),
         actions: [
           IconButton(
               icon: const Icon(Icons.add),
@@ -35,6 +35,7 @@ class UserProducts extends StatelessWidget {
           child: ListView.builder(
               itemCount: products.items.length,
               itemBuilder: (ctx, idx) => UserProductItem(
+                    id: products.items[idx].id,
                     title: products.items[idx].title,
                     imageUrl: products.items[idx].imageUrl,
                   ))),

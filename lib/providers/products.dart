@@ -3,7 +3,6 @@ import './product.dart';
 
 // this is central store allowing set reducers to the state.
 class Products with ChangeNotifier {
-
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -47,12 +46,34 @@ class Products with ChangeNotifier {
     return _items.where((item) => item.isFavorite).toList();
   }
 
-  void addProduct(){
-    // _items.add(value)
+  void addProduct(Product product) {
+    var newProduct = Product(
+        id: DateTime.now().toString(),
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl);
+    _items.add(newProduct);
     notifyListeners();
   }
 
-  findById(String id){
+  void updateProduct(Product product) {
+    final existingProduct = _items.indexWhere((prod) => prod.id == product.id);
+    if (existingProduct >= 0) {
+      _items[existingProduct] = product;
+      notifyListeners();
+    }
+  }
+
+  void removeProduct(String productId) {
+    final existingProduct = _items.indexWhere((prod) => prod.id == productId);
+    if (existingProduct >= 0) {
+      _items.removeAt(existingProduct);
+      notifyListeners();
+    }
+  }
+
+  findById(String id) {
     return _items.firstWhere((product) => product.id == id);
   }
 }
