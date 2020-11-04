@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 // provider
 import '../providers/cart.dart';
+
 class CartItem extends StatelessWidget {
   final String productId;
   final String id;
@@ -16,7 +17,46 @@ class CartItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       direction: DismissDirection.endToStart,
-      onDismissed: (direction){
+      confirmDismiss: (direction) {
+        return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text('Are you sure?'),
+            content: Text('Do you want to remove the item from the cart ?'),
+            actions: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Theme.of(context).primaryColor,
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor,
+                    width: 3,
+                  ),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop(false);
+                  },
+                  child: Text(
+                    'No',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+                  ),
+                ),
+              ),
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop(true);
+                },
+                child: Text(
+                  'Yes',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      onDismissed: (direction) {
         Provider.of<Cart>(context, listen: false).removeItem(productId);
       },
       key: ValueKey(id),

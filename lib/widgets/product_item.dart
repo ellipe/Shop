@@ -17,6 +17,7 @@ class ProductItem extends StatelessWidget {
       child: GridTile(
         child: GestureDetector(
           onTap: () {
+            Scaffold.of(context).hideCurrentSnackBar(); // @TODO look for best practices.
             Navigator.of(context)
                 .pushNamed(ProductDetail.routeName, arguments: product.id);
           },
@@ -44,10 +45,12 @@ class ProductItem extends StatelessWidget {
                       'Item added to cart!',
                       textAlign: TextAlign.center,
                     ),
-                    duration: Duration(seconds: 3),
-                    action: SnackBarAction(label: 'UNDO', onPressed: (){
-                      cart.removeSingleItem(product.id);
-                    }),
+                    duration: Duration(seconds: 2),
+                    action: SnackBarAction(
+                        label: 'UNDO',
+                        onPressed: () {
+                          cart.removeSingleItem(product.id);
+                        }),
                   ),
                 );
                 cart.addItem(product.id, product.price, product.title);
