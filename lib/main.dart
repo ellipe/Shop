@@ -7,6 +7,7 @@ import './views/product_detail.dart';
 import './views/shopping_cart.dart';
 import './views/orders_list.dart';
 import './views/user_products.dart';
+import './views/edit_product.dart';
 
 // providers
 import './providers/products.dart';
@@ -41,6 +42,7 @@ class ShopApp extends StatelessWidget {
             ShoppingCart.routeName: (ctx) => ShoppingCart(),
             OrdersList.routeName: (ctx) => OrdersList(),
             UserProducts.routeName: (ctx) => UserProducts(),
+            EditProduct.routeName: (ctx) => EditProduct(),
           },
         ),
     );

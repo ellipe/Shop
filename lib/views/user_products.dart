@@ -4,6 +4,9 @@ import 'package:provider/provider.dart';
 // providers
 import '../providers/products.dart';
 
+// views
+import './edit_product.dart';
+
 // Widgets
 import '../widgets/user_product_item.dart';
 import '../widgets/appDrawer.dart';
@@ -22,7 +25,7 @@ class UserProducts extends StatelessWidget {
           IconButton(
               icon: const Icon(Icons.add),
               onPressed: () {
-                //...
+                Navigator.of(context).pushNamed(EditProduct.routeName);
               }),
         ],
       ),
