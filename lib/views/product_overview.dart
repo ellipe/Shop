@@ -6,6 +6,7 @@ import './shopping_cart.dart';
 
 // providers
 import '../providers/cart.dart';
+import '../providers/products.dart';
 
 // widgets
 import '../widgets/products_grid.dart';
@@ -21,6 +22,21 @@ class ProductOverview extends StatefulWidget {
 
 class _ProductOverviewState extends State<ProductOverview> {
   bool _showFavoritesOnly = false;
+  bool _isInit = false;
+  bool _isLoadingProducts = false;
+
+  @override
+  Future<void> didChangeDependencies() async {
+    if (!_isInit) {
+      _isLoadingProducts = true;
+      await Provider.of<Products>(context, listen: false).fetchAllProducts();
+      setState(() {
+        _isLoadingProducts = false;
+      });
+      _isInit = true;
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +95,11 @@ class _ProductOverviewState extends State<ProductOverview> {
         ],
       ),
       drawer: AppDrawer(),
-      body: ProductGrid(_showFavoritesOnly),
+      body: _isLoadingProducts
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : ProductGrid(_showFavoritesOnly),
     );
   }
 }

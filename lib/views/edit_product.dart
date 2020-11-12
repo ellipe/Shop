@@ -77,22 +77,21 @@ class _EditProductState extends State<EditProduct> {
       return;
     }
     _form.currentState.save();
+
     _isLoading = true;
     final productProvider = Provider.of<Products>(context, listen: false);
-    if (_editedProduct.id == null) {
-      try {
+    try {
+      if (_editedProduct.id == null) {
         await productProvider.addProduct(_editedProduct);
-      } catch (e) {
-        print('Error handled in widget, created a showDialog should be useful');
-        print(e);
-      } finally {
-        Navigator.of(context).pop();
-        _isLoading = false;
+      } else {
+        await productProvider.updateProduct(_editedProduct);
       }
-      
-    } else {
-      productProvider.updateProduct(_editedProduct);
+    } catch (error) {
+      print('Error handled in widget, created a showDialog should be useful');
+      print(error);
     }
+    Navigator.of(context).pop();
+    _isLoading = false;
   }
 
   @override

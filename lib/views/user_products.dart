@@ -14,9 +14,14 @@ import '../widgets/appDrawer.dart';
 class UserProducts extends StatelessWidget {
   static const routeName = '/products';
 
+  Future<void> _fetchRecentProducts(BuildContext context) async {
+   await Provider.of<Products>(context, listen: false).fetchAllProducts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final products = Provider.of<Products>(context);
+
 
     return Scaffold(
       appBar: AppBar(
@@ -30,15 +35,18 @@ class UserProducts extends StatelessWidget {
         ],
       ),
       drawer: AppDrawer(),
-      body: Padding(
-          padding: EdgeInsets.all(8),
-          child: ListView.builder(
-              itemCount: products.items.length,
-              itemBuilder: (ctx, idx) => UserProductItem(
-                    id: products.items[idx].id,
-                    title: products.items[idx].title,
-                    imageUrl: products.items[idx].imageUrl,
-                  ))),
+      body: RefreshIndicator(
+        onRefresh: () => _fetchRecentProducts(context),
+        child: Padding(
+            padding: EdgeInsets.all(8),
+            child: ListView.builder(
+                itemCount: products.items.length,
+                itemBuilder: (ctx, idx) => UserProductItem(
+                      id: products.items[idx].id,
+                      title: products.items[idx].title,
+                      imageUrl: products.items[idx].imageUrl,
+                    ))),
+      ),
     );
   }
 }
