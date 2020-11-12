@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import './product.dart';
 
 // this is central store allowing set reducers to the state.
@@ -46,15 +48,32 @@ class Products with ChangeNotifier {
     return _items.where((item) => item.isFavorite).toList();
   }
 
-  void addProduct(Product product) {
-    var newProduct = Product(
-        id: DateTime.now().toString(),
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        imageUrl: product.imageUrl);
-    _items.add(newProduct);
-    notifyListeners();
+  Future<void> addProduct(Product product) async {
+    const API_URL = 'https://shop-62d11.firebaseio.com/products.json';
+    try {
+      final response = await http.post(
+        API_URL,
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'price': product.price,
+          'imageUrl': product.imageUrl
+        }),
+      );
+
+      final newProduct = Product(
+          id: json.decode(response.body)['name'],
+          title: product.title,
+          description: product.description,
+          price: product.price,
+          imageUrl: product.imageUrl);
+      _items.add(newProduct);
+      notifyListeners();
+    } catch (err) {
+      print('error in model');
+      print(err);
+      throw err;
+    }
   }
 
   void updateProduct(Product product) {
