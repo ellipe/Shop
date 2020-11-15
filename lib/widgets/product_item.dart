@@ -31,7 +31,19 @@ class ProductItem extends StatelessWidget {
             icon: Icon(
                 product.isFavorite ? Icons.favorite : Icons.favorite_border),
             onPressed: () {
-              product.toggleFavoriteStatus();
+              product.toggleFavoriteStatus().catchError((error) {
+                print(error);
+                Scaffold.of(context).hideCurrentSnackBar();
+                Scaffold.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      'Unable to set favorite',
+                      textAlign: TextAlign.center,
+                    ),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              });
             },
             color: Theme.of(context).accentColor,
           ),
