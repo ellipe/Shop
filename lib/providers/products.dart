@@ -5,7 +5,7 @@ import './product.dart';
 
 // this is central store allowing set reducers to the state.
 class Products with ChangeNotifier {
-  final apiUrl = 'https://shop-62d11.firebaseio.com/products.json';
+  
 
   List<Product> _items = [];
 
@@ -18,8 +18,9 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchAllProducts() async {
+    const URL = 'https://shop-62d11.firebaseio.com/products.json';
     try {
-      final response = await http.get(apiUrl);
+      final response = await http.get(URL);
       final parsedData = json.decode(response.body) as Map<String, dynamic>;
       List<Product> loadedProducts = [];
       parsedData.forEach((productId, productData) {
@@ -42,9 +43,10 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
+    const URL = 'https://shop-62d11.firebaseio.com/products.json';
     try {
       final response = await http.post(
-        apiUrl,
+        URL,
         body: json.encode({
           'title': product.title,
           'description': product.description,
